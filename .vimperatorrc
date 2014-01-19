@@ -1,0 +1,12 @@
+"3.8.1 (created: 2013/12/11 19:14:15)
+
+nnoremap ,p :ytpause<Return>
+nnoremap ,t :tabdetach<CR>
+nnoremap j 4j
+nnoremap k 4k
+nnoremap h 4h
+nnoremap l 4l
+set "editor=/opt/local/bin/mvim -f"
+source! /Users/harciga/.vimperatorrc.local
+
+" vim: set ft=vimperator:
