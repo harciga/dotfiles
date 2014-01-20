@@ -1,0 +1,73 @@
+# This is the default .slate file.
+# If no ~/.slate file exists this is the file that will be used.
+
+config defaultToCurrentScreen true
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+
+bind pad0 relaunch
+
+# Resize Bindings
+bind pad1:ctrl move windowTopLeftX;windowTopLeftY screenSizeX/4;screenSizeY/4
+bind pad2:ctrl move windowTopLeftX;windowTopLeftY screenSizeX/3;screenSizeY/3
+bind pad3:ctrl move windowTopLeftX;windowTopLeftY screenSizeX/2;screenSizeY/3
+
+bind pad4:ctrl move windowTopLeftX;windowTopLeftY screenSizeX/4;screenSizeY/2
+bind pad5:ctrl move windowTopLeftX;windowTopLeftY screenSizeX/3;screenSizeY/2
+bind pad6:ctrl move windowTopLeftX;windowTopLeftY screenSizeX/2;screenSizeY/2
+
+bind pad7:ctrl move windowTopLeftX;windowTopLeftY screenSizeX/3;screenSizeY
+bind pad8:ctrl move windowTopLeftX;windowTopLeftY screenSizeX/2;screenSizeY
+bind pad9:ctrl move windowTopLeftX;windowTopLeftY screenSizeX*2/3;screenSizeY
+# Move bindings
+bind pad8:ctrl;cmd move windowTopLeftX;windowTopLeftY-(screenSizeY/12) windowSizeX;windowSizeY
+bind pad2:ctrl;cmd move windowTopLeftX;windowTopLeftY+(screenSizeY/12) windowSizeX;windowSizeY
+bind pad4:ctrl;cmd move windowTopLeftX-(screenSizeX/12);windowTopLeftY windowSizeX;windowSizeY
+bind pad6:ctrl;cmd move windowTopLeftX+(screenSizeX/12);windowTopLeftY windowSizeX;windowSizeY
+# bind right:alt resize +10% +0
+# bind left:alt resize -10% +0
+# bind up:alt resize +0 -10%
+# bind down:alt resize +0 +10%
+# bind right:ctrl;alt resize -10% +0 bottom-right
+# bind left:ctrl;alt resize +10% +0 bottom-right
+# bind up:ctrl;alt resize +0 +10% bottom-right
+# bind down:ctrl;alt resize +0 -10% bottom-right
+
+# Push Bindings
+bind pad1:padEnter corner bottom-left
+bind pad3:padEnter corner bottom-right
+bind pad7:padEnter corner top-left
+bind pad9:padEnter corner top-right
+
+bind pad6:padEnter push right center
+bind pad4:padEnter push left center
+bind pad8:padEnter push up center
+bind pad2:padEnter push down center
+
+# Nudge Bindings
+# bind right:shift;alt nudge +10% +0
+# bind left:shift;alt nudge -10% +0
+# bind up:shift;alt nudge +0 -10%
+# bind down:shift;alt nudge +0 +10%
+
+# Focus Bindings
+bind pad4:pad5 focus left
+bind pad6:pad5 focus right
+bind pad8:pad5 focus up
+bind pad2:pad5 focus down
+bind pad1:pad5 focus below
+bind pad7:pad5 focus above
+bind pad3:pad5 focus behind
+
+bind f:ctrl;cmd focus 'Firefox'
+bind t:ctrl;cmd focus 'iTerm'
+bind m:ctrl;cmd focus 'MacVim'
+bind i:ctrl;cmd focus 'iTunes'
+bind d:ctrl;cmd focus 'BibDesk'
+bind b:ctrl;cmd focus 'TheBrain'
+bind s:ctrl;cmd focus 'Skim'
+bind v:ctrl;cmd focus 'DEVONthink Pro Office'
+bind c:ctrl;cmd focus 'CmapTools'
+
+# Window Hints
+bind esc:cmd hint
