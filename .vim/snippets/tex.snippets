@@ -1,0 +1,12 @@
+snippet glo
+	\newglossaryentry{${1:entry}}{
+	           name = $1,
+	    description = {${2:description}}}
+
+snippet fig
+	\begin{figure}[hbtp]
+	\centering
+	\includegraphics[width=\textwidth]{${1:filename}}
+	\caption[${2:caption}]{$2}
+	\label{fig:${3:label}}
+	\end{figure}
