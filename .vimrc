@@ -8,7 +8,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 " My Bundles here:
 " ===============
-" Bundle 'Align'
+Bundle 'Align'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'w0ng/vim-hybrid'
 Bundle 'tomasr/molokai'
@@ -26,12 +26,12 @@ Bundle 'vim-voom/VOoM'
 let g:voom_tree_placement = "right"
 let g:voom_tree_width = 50
 nmap <silent> <D-2> :Voomtoggle<CR>
-if (has('gui_running'))
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline_detect_iminsert = 1
-  let g:airline_powerline_fonts = 1                                            " Enables utf-8 glyphs
-  Bundle 'bling/vim-airline'
-endif
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_detect_iminsert = 1
+let g:airline_powerline_fonts = 1                                            " Enables utf-8 glyphs
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#branch#empty_message = ''
+Bundle 'bling/vim-airline'
 " Bundle 'farseer90718/vim-taskwarrior'
 " Bundle 'file:///Users/harciga/.vim/dev/taskwarrior'
 Bundle 'file:///Users/harciga/.vim/dev/vimwiki'
@@ -82,17 +82,11 @@ let     g:Tlist_Compact_Format      = 1
 let     g:Tlist_Exit_OnlyWindow     = 1
 let   g:Tlist_Enable_Fold_Column    = 0
 let g:Tlist_GainFocus_On_ToggleOpen = 1
+let g:Tlist_Inc_Winwidth = 0
 nnoremap <silent> <D-1> :TlistToggle<CR>
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 let g:surround_34 = "«\r»"
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#branch#empty_message = ''
-Bundle 'mhinz/vim-startify'
-let g:startify_list_order = ['bookmarks', 'files']
-let g:startify_bookmarks = [ '~/Latex/Tesis.tex' ]
-" Bundle 'The-NERD-tree'
-let NERDTreeShowBookmarks = 1
 Bundle 'ZoomWin'
 
 " Back to my .vimrc
@@ -141,16 +135,16 @@ set    guioptions-=rL
 set    laststatus =2
 set concealcursor =cv
 set  conceallevel =2
-set scrolloff =5
+set scrolloff =2
+set display=lastline
 
+set background=dark
+colorscheme Solarized
 if (has('gui_running'))
-  set background=light
-  colorscheme Solarized
   call togglebg#map("<F2>")
   set lines =60
   set columns =180
 else
-  colorscheme molokai
   highlight MyTagListFileName guifg=white guibg=NONE ctermfg=white ctermbg=NONE
   set nowrap
 endif
@@ -184,6 +178,7 @@ augroup END " }
 
 " Global mappings
 let maplocalleader = ","
+nmap Q q:
 nmap <silent><LocalLeader>ev :e $MYVIMRC<cr>
 noremap <silent><LocalLeader>/ :nohls<CR>
 " nnoremap <silent><LocalLeader>f :<C-U>call <SID>VIMRC_toggleFolded()<CR>
@@ -192,16 +187,14 @@ map <silent> <LocalLeader>ls :silent
       \ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>"
       \ "%:p" <CR>
 inoremap <C-u> <C-g>u<C-u>
-" nnoremap <LocalLeader>b :<C-u>Unite buffer<CR>
 nnoremap <LocalLeader>b :<C-u>call <SID>Unite_buffer()<CR>
 nnoremap <LocalLeader>f :<C-u>Unite file<CR>
-"nnoremap <LocalLeader>b :<C-u>Unite bookmark<CR>
 let g:unite_source_history_yank_enable = 1
 nnoremap <LocalLeader>y :<C-u>Unite history/yank<CR>
 
 function! s:Unite_buffer()
 call unite#custom#source("buffer","ignore_pattern",substitute(expand("%:."),"\\.\\|\\/","\\\\\\0","g")) 
-:Unite buffer
+:Unite bookmark buffer
 endfunction
 
 function! s:VIMRC_toggleFolded()
