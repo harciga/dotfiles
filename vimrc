@@ -1,6 +1,6 @@
 " Vundle start-up configuration
 filetype off
-set rtp+=~/.vim/bundle/vundle
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
 " let Vundle manage Vundle
@@ -25,8 +25,9 @@ let g:gundo_help = 0
 Bundle 'vim-voom/VOoM'
 let g:voom_tree_placement = "right"
 let g:voom_tree_width = 50
-nmap <silent> <D-2> :Voomtoggle<CR>
-" let g:airline#extensions#tabline#enabled = 1
+noremap <silent> <D-2> :Voomtoggle<CR>
+let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#tabline#show_buffers = 0
 let g:airline_detect_iminsert = 1
 let g:airline_powerline_fonts = 1                                            " Enables utf-8 glyphs
 let g:airline#extensions#branch#enabled = 1
@@ -35,15 +36,19 @@ let g:airline#extensions#whitespace#enabled = 0
 Bundle 'bling/vim-airline'
 " Bundle 'farseer90718/vim-taskwarrior'
 " Bundle 'file:///Users/harciga/.vim/dev/taskwarrior'
-Bundle 'file:///Users/harciga/.vim/dev/vimwiki'
+" Bundle 'file:///Users/harciga/.vim/dev/vimwiki'
 let g:task_gui_term = 1
 " Bundle 'kshenoy/vim-signature'
 " Bundle 'EasyMotion'
 " Bundle 'justinmk/vim-sneak'
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
+let g:tex_conceal = "bdgm"
 let                 g:tex_flavor = 'latex'                                      " Empty *.tex defaults to ft=tex
-let            g:LatexBox_viewer = '/Applications/Skim.app/Contents/MacOS/Skim' " Opens the PDFs in Skim
-let                 g:tex_conceal= 'abdmg'
+  if has("gui_mac")
+    let            g:LatexBox_viewer = '/Applications/Skim.app/Contents/MacOS/Skim' " Opens the PDFs in Skim
+  else
+    let            g:LatexBox_viewer = 'zathura' " Opens the PDFs in Skim
+  endif
 " let           g:tex_fold_enabled = 1
 " let g:LatexBox_Folding = 1
 let     g:LatexBox_latexmk_async = 1
@@ -52,7 +57,7 @@ Bundle 'matchit.zip'
 Bundle 'Shougo/vimproc'
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#auto_completion_start_length = 4
-let g:neocomplete#disable_auto_complete = 1
+"let g:neocomplete#disable_auto_complete = 1
 if !exists('g:neocomplete#force_omni_input_patterns')
   let g:neocomplete#force_omni_input_patterns = {}
 endif
@@ -71,7 +76,8 @@ function! s:my_cr_function()
   "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><Tab> pumvisible() ? neocomplete#close_popup() : "\<Tab>"
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
@@ -93,21 +99,22 @@ nnoremap <C-h>  :<C-u>Unite -start-insert help<CR>
 nnoremap <silent> g<C-h>  :<C-u>UniteWithCursorWord help<CR>
 " Bundle 'snipMate'
 Bundle 'SyntaxAttr.vim'
-map -a :call SyntaxAttr()<CR>
+nnoremap -a :call SyntaxAttr()<CR>
 Bundle 'taglist.vim'
 let        g:Tlist_WinWidth         = 40                                           " Window's width to 40 chars
 let      g:tlist_make_settings      = 'make;m:makros;t:targets'                    " Latex customization
-let      g:tlist_tex_settings       = 'latex;d:definitions;s:outline;g:graphics;l:labels'        " Latex customization
-let      g:tlist_tex_settings       = 'latex;g:graphics;l:labels'        " Latex customization
+" let      g:tlist_tex_settings       = 'latex;d:definitions;s:outline;g:graphics;l:labels'        " Latex customization
+let      g:tlist_tex_settings       = 'latex;t:tables;g:graphics;l:labels'        " Latex customization
 let     g:Tlist_Close_On_Select     = 1
 let     g:Tlist_Compact_Format      = 1
 let     g:Tlist_Exit_OnlyWindow     = 1
 let   g:Tlist_Enable_Fold_Column    = 0
 let g:Tlist_GainFocus_On_ToggleOpen = 1
 let g:Tlist_Inc_Winwidth = 0
+let g:Tlist_Show_One_File = 1
 nnoremap <silent> <D-1> :TlistToggle<CR>
 Bundle 'tpope/vim-fugitive'
-" Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-surround'
 let g:surround_34 = "«\r»"
 Bundle 'ZoomWin'
 
@@ -115,6 +122,9 @@ Bundle 'ZoomWin'
 filetype plugin indent on
 syntax on
 
+if &term == "rxvt-unicode-256color"
+ let &term = "screen-256color"
+endif
 if has("multi_byte")
   set encoding =utf-8
   if &termencoding == ""
@@ -134,7 +144,7 @@ set linebreak
 " Turn backup off
 set nobackup
 set nowritebackup
-set noswapfile
+" set noswapfile
 " Tab settings
 set expandtab
 set shiftwidth=2
@@ -149,12 +159,14 @@ set  wildmenu
 set  showcmd   
 set       breakat-=.
 set       grepprg =grep\ -nH\ $*
-set       guifont =DejaVu\ Sans\ Mono\ for\ Powerline:h19
 set       history =100
 set     listchars =tab:·\ ,eol:¶,trail:·,nbsp:·,extends:»,precedes:«
 set     showbreak =↪\ 
 " set    foldcolumn =5
-set    guioptions-=rL
+set    guioptions-=r
+set    guioptions-=L
+set    guioptions-=m
+set    guioptions-=T
 set    laststatus =2
 set concealcursor =cv
 set  conceallevel =2
@@ -167,10 +179,19 @@ if has("patch-7.4.314")
 endif
 
 set background=dark
-colorscheme Solarized
-
-if (!has('gui_running'))
+colorscheme hybrid
+if (has('gui_running'))
+  call togglebg#map("<F2>")
+  if has("gui_mac")
+    set guifont =DejaVu\ Sans\ Mono\ for\ Powerline:h19
+    set lines =60
+    set columns =180
+  else
+    set guifont =DejaVu\ Sans\ Mono\ for\ Powerline\ 16
+  endif
+else
   highlight MyTagListFileName guifg=white guibg=NONE ctermfg=white ctermbg=NONE
+  set nowrap
 endif
 
 " highlight VertSplit gui=NONE cterm=NONE guibg=NONE ctermbg=NONE
@@ -190,8 +211,13 @@ augroup MyAutoCmd
                                   \|   let &l:foldmethod=w:last_fdm 
                                   \|   unlet w:last_fdm 
                                   \| endif
-  autocmd InsertEnter *.tex VimProcBang textinputsource -s Spanish
-  autocmd InsertLeave *.tex VimProcBang textinputsource -s U.S.
+  if has("gui_mac")
+    autocmd InsertEnter *.tex VimProcBang textinputsource -s Spanish
+    autocmd InsertLeave *.tex VimProcBang textinputsource -s U.S.
+  else
+    autocmd InsertEnter *.tex VimProcBang setxkbmap -layout latam,us
+    autocmd InsertLeave *.tex VimProcBang setxkbmap -layout us
+  endif
 augroup END
 
 " Source my .vimrc immediately
@@ -202,20 +228,35 @@ augroup END " }
 
 " Global mappings
 let maplocalleader = ","
-nmap Q q:
+" nmap Q q:
+inoremap jk 
+inoremap kj 
 nnoremap j gj
 nnoremap k gk
+inoremap <LocalLeader>b \textbf{
+inoremap <LocalLeader>i \textit{
+
+nnoremap <silent> <LocalLeader>1 :TlistToggle<CR>
+nnoremap <silent> <LocalLeader>2 :Voomtoggle<CR>
 map <ScrollWheelUp> <Nop>
 map <ScrollWheelDown> <Nop>
 map <PageUp> <Nop>
 map <PageDown> <Nop>
-nmap <silent><LocalLeader>ev :e $MYVIMRC<cr>
-noremap <silent><LocalLeader>/ :nohls<CR>
+nnoremap <silent><LocalLeader>ev :e $MYVIMRC<cr>
+nnoremap <silent><LocalLeader>/ :nohls<CR>
 " nnoremap <silent><LocalLeader>f :<C-U>call <SID>VIMRC_toggleFolded()<CR>
-map <silent> <LocalLeader>ls :silent
+nnoremap <silent><LocalLeader>w :<C-U>call <SID>VIMRC_toggleWrap()<CR>
+if has("gui_mac")
+  nnoremap <silent> <LocalLeader>ls :silent
       \ !/Applications/Skim.app/Contents/SharedSupport/displayline
       \ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>"
       \ "%:p" <CR>
+else
+  nnoremap <silent> <LocalLeader>ls :silent
+      \ !zathura --synctex-forward
+      \ <C-R>=line('.')<CR>:0:"<C-R>=expand("%:p")<CR>"
+      \ <C-R>=LatexBox_GetOutputFile()<CR><CR>
+endif
 inoremap <C-u> <C-g>u<C-u>
 nnoremap <LocalLeader>b :<C-u>call <SID>Unite_buffer()<CR>
 nnoremap <LocalLeader>f :<C-u>Unite file -auto-preview<CR>
@@ -225,6 +266,18 @@ nnoremap <LocalLeader>y :<C-u>Unite history/yank<CR>
 function! s:Unite_buffer()
 call unite#custom#source("buffer","ignore_pattern",substitute(expand("%:."),"\\.\\|\\/","\\\\\\0","g")) 
 :Unite bookmark buffer
+endfunction
+
+function! s:VIMRC_toggleWrap()
+  if !exists("b:toggleWrap") 
+    let b:toggleWrap = &wrap
+  endif
+  if (b:toggleWrap)
+    setlocal nowrap
+  else
+    setlocal wrap
+  endif
+  let b:toggleWrap = !b:toggleWrap
 endfunction
 
 function! s:VIMRC_toggleFolded()
