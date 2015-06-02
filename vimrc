@@ -44,7 +44,7 @@ let g:task_gui_term = 1
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
 let g:tex_conceal = "bdgm"
 let                 g:tex_flavor = 'latex'                                      " Empty *.tex defaults to ft=tex
-  if has("gui_mac")
+  if has("gui_macvim")
     let            g:LatexBox_viewer = '/Applications/Skim.app/Contents/MacOS/Skim' " Opens the PDFs in Skim
   else
     let            g:LatexBox_viewer = 'zathura' " Opens the PDFs in Skim
@@ -119,6 +119,7 @@ let g:surround_34 = "«\r»"
 Bundle 'ZoomWin'
 
 " Back to my .vimrc
+call vundle#end()
 filetype plugin indent on
 syntax on
 
@@ -182,7 +183,7 @@ set background=dark
 colorscheme hybrid
 if (has('gui_running'))
   call togglebg#map("<F2>")
-  if has("gui_mac")
+  if has("gui_macvim")
     set guifont =DejaVu\ Sans\ Mono\ for\ Powerline:h19
     set lines =60
     set columns =180
@@ -211,7 +212,7 @@ augroup MyAutoCmd
                                   \|   let &l:foldmethod=w:last_fdm 
                                   \|   unlet w:last_fdm 
                                   \| endif
-  if has("gui_mac")
+  if has("gui_macvim")
     autocmd InsertEnter *.tex VimProcBang textinputsource -s Spanish
     autocmd InsertLeave *.tex VimProcBang textinputsource -s U.S.
   else
@@ -246,7 +247,7 @@ nnoremap <silent><LocalLeader>ev :e $MYVIMRC<cr>
 nnoremap <silent><LocalLeader>/ :nohls<CR>
 " nnoremap <silent><LocalLeader>f :<C-U>call <SID>VIMRC_toggleFolded()<CR>
 nnoremap <silent><LocalLeader>w :<C-U>call <SID>VIMRC_toggleWrap()<CR>
-if has("gui_mac")
+if has("gui_macvim")
   nnoremap <silent> <LocalLeader>ls :silent
       \ !/Applications/Skim.app/Contents/SharedSupport/displayline
       \ <C-R>=line('.')<CR> "<C-R>=LatexBox_GetOutputFile()<CR>"
