@@ -26,11 +26,12 @@ Bundle 'vim-voom/VOoM'
 let g:voom_tree_placement = "right"
 let g:voom_tree_width = 50
 nmap <silent> <D-2> :Voomtoggle<CR>
-let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
 let g:airline_detect_iminsert = 1
 let g:airline_powerline_fonts = 1                                            " Enables utf-8 glyphs
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#branch#empty_message = ''
+let g:airline#extensions#whitespace#enabled = 0
 Bundle 'bling/vim-airline'
 " Bundle 'farseer90718/vim-taskwarrior'
 " Bundle 'file:///Users/harciga/.vim/dev/taskwarrior'
@@ -38,10 +39,11 @@ Bundle 'file:///Users/harciga/.vim/dev/vimwiki'
 let g:task_gui_term = 1
 " Bundle 'kshenoy/vim-signature'
 " Bundle 'EasyMotion'
-Bundle 'justinmk/vim-sneak'
+" Bundle 'justinmk/vim-sneak'
 Bundle 'LaTeX-Box-Team/LaTeX-Box'
 let                 g:tex_flavor = 'latex'                                      " Empty *.tex defaults to ft=tex
 let            g:LatexBox_viewer = '/Applications/Skim.app/Contents/MacOS/Skim' " Opens the PDFs in Skim
+let                 g:tex_conceal= 'abdmg'
 " let           g:tex_fold_enabled = 1
 " let g:LatexBox_Folding = 1
 let     g:LatexBox_latexmk_async = 1
@@ -50,7 +52,7 @@ Bundle 'matchit.zip'
 Bundle 'Shougo/vimproc'
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#auto_completion_start_length = 4
-"let g:neocomplete#disable_auto_complete = 1
+let g:neocomplete#disable_auto_complete = 1
 if !exists('g:neocomplete#force_omni_input_patterns')
   let g:neocomplete#force_omni_input_patterns = {}
 endif
@@ -60,16 +62,36 @@ let g:neocomplete#force_omni_input_patterns.tex = '\\cite\a\?{[^}]*\|\\ref{[^}]*
 let g:neocomplete#enable_auto_select = 1
 let g:neocomplete#enable_refresh_always = 1
 " let g:neocomplete#sources#dictionary#dictionaries = {'_':'~/mydict'}
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplete#close_popup() . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" inoremap <expr><C-y>  neocomplete#close_popup()
+" inoremap <expr><C-e>  neocomplete#cancel_popup()
+" Close popup by <Space>.
+" inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 Bundle 'Shougo/neocomplete.vim'
 " Bundle 'Shougo/neocomplcache.vim'
 Bundle 'Shougo/unite.vim'
 " Bundle 'Shougo/vimfiler.vim'
 let g:unite_force_overwrite_statusline = 0
+let g:unite_source_grep_command = 'ag'
+let g:unite_source_grep_default_opts = '--line-numbers --nocolor --nogroup --hidden --ignore-case'
+let g:unite_source_grep_recursive_opt = ''
 " Execute help.
 nnoremap <C-h>  :<C-u>Unite -start-insert help<CR>
 " Execute help by cursor keyword.
 nnoremap <silent> g<C-h>  :<C-u>UniteWithCursorWord help<CR>
-Bundle 'snipMate'
+" Bundle 'snipMate'
 Bundle 'SyntaxAttr.vim'
 map -a :call SyntaxAttr()<CR>
 Bundle 'taglist.vim'
@@ -85,7 +107,7 @@ let g:Tlist_GainFocus_On_ToggleOpen = 1
 let g:Tlist_Inc_Winwidth = 0
 nnoremap <silent> <D-1> :TlistToggle<CR>
 Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-surround'
+" Bundle 'tpope/vim-surround'
 let g:surround_34 = "«\r»"
 Bundle 'ZoomWin'
 
@@ -121,6 +143,7 @@ set softtabstop=2
 set dictionary+=/usr/share/dict/words
 set backspace=eol,start,indent
 set clipboard=unnamedplus,unnamed
+set nowrapscan
 
 set  wildmenu  
 set  showcmd   
@@ -129,7 +152,7 @@ set       grepprg =grep\ -nH\ $*
 set       guifont =DejaVu\ Sans\ Mono\ for\ Powerline:h19
 set       history =100
 set     listchars =tab:·\ ,eol:¶,trail:·,nbsp:·,extends:»,precedes:«
-" set     showbreak =↪
+set     showbreak =↪\ 
 " set    foldcolumn =5
 set    guioptions-=rL
 set    laststatus =2
@@ -137,16 +160,17 @@ set concealcursor =cv
 set  conceallevel =2
 set scrolloff =2
 set display=lastline
+set diffopt+=vertical
+set mouse=
+if has("patch-7.4.314")
+  set shortmess+=c
+endif
 
 set background=dark
 colorscheme Solarized
-if (has('gui_running'))
-  call togglebg#map("<F2>")
-  set lines =60
-  set columns =180
-else
+
+if (!has('gui_running'))
   highlight MyTagListFileName guifg=white guibg=NONE ctermfg=white ctermbg=NONE
-  set nowrap
 endif
 
 " highlight VertSplit gui=NONE cterm=NONE guibg=NONE ctermbg=NONE
@@ -179,6 +203,12 @@ augroup END " }
 " Global mappings
 let maplocalleader = ","
 nmap Q q:
+nnoremap j gj
+nnoremap k gk
+map <ScrollWheelUp> <Nop>
+map <ScrollWheelDown> <Nop>
+map <PageUp> <Nop>
+map <PageDown> <Nop>
 nmap <silent><LocalLeader>ev :e $MYVIMRC<cr>
 noremap <silent><LocalLeader>/ :nohls<CR>
 " nnoremap <silent><LocalLeader>f :<C-U>call <SID>VIMRC_toggleFolded()<CR>
@@ -188,7 +218,7 @@ map <silent> <LocalLeader>ls :silent
       \ "%:p" <CR>
 inoremap <C-u> <C-g>u<C-u>
 nnoremap <LocalLeader>b :<C-u>call <SID>Unite_buffer()<CR>
-nnoremap <LocalLeader>f :<C-u>Unite file<CR>
+nnoremap <LocalLeader>f :<C-u>Unite file -auto-preview<CR>
 let g:unite_source_history_yank_enable = 1
 nnoremap <LocalLeader>y :<C-u>Unite history/yank<CR>
 

@@ -6,7 +6,7 @@ nnoremap j 4j
 nnoremap k 4k
 nnoremap h 4h
 nnoremap l 4l
-set "editor=/opt/local/bin/mvim -f"
-source! /Users/harciga/.vimperatorrc.local
+set "editor=mvim -f"
+source! ~/.vimperatorrc.local
 
 " vim: set ft=vimperator:

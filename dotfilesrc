@@ -1,0 +1,8 @@
+[dotfiles]
+repository = /Users/harciga/.dotfiles/
+
+ignore = [
+    '.git',
+    '.gitignore',
+    '.vim',
+    'xterm-256color-italic.terminfo']

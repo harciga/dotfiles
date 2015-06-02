@@ -1,0 +1,77 @@
+config defaultToCurrentScreen true
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+alias x windowTopLeftX
+alias y windowTopLeftY
+alias sx screenSizeX
+alias sy screenSizeY
+alias wx windowSizeX
+alias wy windowSizeY
+bind pad0 relaunch
+
+# Resize Bindings
+bind pad1:ctrl move ${x};${y} ${sx}/4;${sy}/4
+bind pad2:ctrl move ${x};${y} ${sx}/3;${sy}/3
+bind pad3:ctrl move ${x};${y} ${sx}/2;${sy}/3
+
+bind pad4:ctrl move ${x};${y} ${sx}/4;${sy}/2
+bind pad5:ctrl move ${x};${y} ${sx}/3;${sy}/2
+bind pad6:ctrl move ${x};${y} ${sx}/2;${sy}/2
+
+bind pad7:ctrl move ${x};${y} ${sx}/3;${sy}
+bind pad8:ctrl move ${x};${y} ${sx}/2;${sy}
+bind pad9:ctrl move ${x};${y} ${sx}*2/3;${sy}
+# Move bindings
+bind pad8:ctrl;cmd move ${x};${y}-(${sy}/12) ${wx};${wy}
+bind pad2:ctrl;cmd move ${x};${y}+(${sy}/12) ${wx};${wy}
+bind pad4:ctrl;cmd move ${x}-(${sx}/12);${y} ${wx};${wy}
+bind pad6:ctrl;cmd move ${x}+(${sx}/12);${y} ${wx};${wy}
+# bind right:alt resize +10% +0
+# bind left:alt resize -10% +0
+# bind up:alt resize +0 -10%
+# bind down:alt resize +0 +10%
+# bind right:ctrl;alt resize -10% +0 bottom-right
+# bind left:ctrl;alt resize +10% +0 bottom-right
+# bind up:ctrl;alt resize +0 +10% bottom-right
+# bind down:ctrl;alt resize +0 -10% bottom-right
+
+# Push Bindings
+bind pad1:padEnter corner bottom-left
+bind pad3:padEnter corner bottom-right
+bind pad7:padEnter corner top-left
+bind pad9:padEnter corner top-right
+
+bind pad6:padEnter push right center
+bind pad4:padEnter push left center
+bind pad8:padEnter push up center
+bind pad2:padEnter push down center
+
+# Nudge Bindings
+# bind right:shift;alt nudge +10% +0
+# bind left:shift;alt nudge -10% +0
+# bind up:shift;alt nudge +0 -10%
+# bind down:shift;alt nudge +0 +10%
+
+# Focus Bindings
+bind pad4:pad5 focus left
+bind pad6:pad5 focus right
+bind pad8:pad5 focus up
+bind pad2:pad5 focus down
+bind pad1:pad5 focus below
+bind pad7:pad5 focus above
+bind pad3:pad5 focus behind
+
+bind b:ctrl,delete focus 'TheBrain'
+bind c:ctrl,delete focus 'CmapTools'
+bind d:ctrl,delete focus 'Dictionary'
+bind f:ctrl,delete focus 'Firefox'
+bind i:ctrl,delete focus 'iTunes'
+bind k:ctrl,delete focus 'BibDesk'
+bind v:ctrl,delete focus 'MacVim'
+bind m:ctrl,delete focus 'Mendeley Desktop'
+bind n:ctrl,delete focus 'Finder'
+bind s:ctrl,delete focus 'Skim'
+bind t:ctrl,delete focus 'iTerm'
+bind w:ctrl,delete focus 'DEVONthink Pro Office'
+bind x:ctrl,delete focus 'X11'
+bind delete:ctrl,delete hint 12340987
