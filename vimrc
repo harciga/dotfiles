@@ -34,9 +34,8 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#branch#empty_message = ''
 let g:airline#extensions#whitespace#enabled = 0
 Bundle 'bling/vim-airline'
-" Bundle 'farseer90718/vim-taskwarrior'
-" Bundle 'file:///Users/harciga/.vim/dev/taskwarrior'
-" Bundle 'file:///Users/harciga/.vim/dev/vimwiki'
+Bundle 'farseer90718/vim-taskwarrior'
+Bundle 'vimwiki/vimwiki'
 let g:task_gui_term = 1
 " Bundle 'kshenoy/vim-signature'
 " Bundle 'EasyMotion'
@@ -161,7 +160,7 @@ set  showcmd
 set       breakat-=.
 set       grepprg =grep\ -nH\ $*
 set       history =100
-set     listchars =tab:·\ ,eol:¶,trail:·,nbsp:·,extends:»,precedes:«
+set     listchars =tab:→\ ,eol:¶,trail:·,nbsp:·,extends:»,precedes:«
 set     showbreak =↪\ 
 " set    foldcolumn =5
 set    guioptions-=r

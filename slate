@@ -61,17 +61,18 @@ bind pad1:pad5 focus below
 bind pad7:pad5 focus above
 bind pad3:pad5 focus behind
 
+bind a:ctrl,delete focus 'Anki'             #   Anki
 bind b:ctrl,delete focus 'TheBrain'
-bind c:ctrl,delete focus 'CmapTools'
-bind d:ctrl,delete focus 'Dictionary'
+bind c:ctrl,delete focus 'BibDesk'          #   C-itations
+bind d:ctrl,delete focus 'DEVONthink Pro Office' # D-atabase
 bind f:ctrl,delete focus 'Firefox'
 bind i:ctrl,delete focus 'iTunes'
-bind k:ctrl,delete focus 'BibDesk'
-bind v:ctrl,delete focus 'MacVim'
-bind m:ctrl,delete focus 'Mendeley Desktop'
-bind n:ctrl,delete focus 'Finder'
+bind l:ctrl,delete focus 'Mendeley Desktop' #   L-ibrary
+bind m:ctrl,delete focus 'CmapTools'        #   M-aps
+bind q:ctrl,delete focus 'Dictionary'       #   Q-uery
+bind r:ctrl,delete focus 'Finder'           #   R-anger
 bind s:ctrl,delete focus 'Skim'
-bind t:ctrl,delete focus 'iTerm'
-bind w:ctrl,delete focus 'DEVONthink Pro Office'
-bind x:ctrl,delete focus 'X11'
-bind delete:ctrl,delete hint 12340987
+bind t:ctrl,delete focus 'iTerm'            #   T-erminal
+bind v:ctrl,delete focus 'MacVim'           #   V-im
+bind x:ctrl,delete focus 'X11'              #   X11
+bind delete:ctrl,delete hint asdfjkl

@@ -28,10 +28,15 @@ include /opt/local/share/doc/task/rc/solarized-dark-256.theme
 
 color=on
 
-report.next.columns=id,project,priority,due,start.active,entry.age,urgency,description.count
+# report.next.columns=id,project,priority,due,start.active,entry.age,urgency,description.count
 report.all.columns=id,status,project,priority,due,end,start.active,entry.age,description.count
 report.long.columns=id,project,priority,entry,start,due,recur,due.countdown,entry.age,depends,tags,description.count
 
 recurrence.limit=1
 calendar.details=full
 calendar.details.report=long
+
+report.in.columns           = id,description
+report.in.description       = Inbox
+report.in.filter            = status:pending limit:page (+in)
+report.in.labels            = ID,Description
