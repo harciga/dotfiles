@@ -4,5 +4,6 @@ repository = ~/.dotfiles/
 ignore = [
     '.git',
     '.gitignore',
+    '.DS_Store',
     '.vim',
     'xterm-256color-italic.terminfo']

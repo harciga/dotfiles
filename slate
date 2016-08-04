@@ -67,12 +67,14 @@ bind c:ctrl,delete focus 'BibDesk'          #   C-itations
 bind d:ctrl,delete focus 'DEVONthink Pro Office' # D-atabase
 bind f:ctrl,delete focus 'Firefox'
 bind i:ctrl,delete focus 'iTunes'
-bind l:ctrl,delete focus 'Mendeley Desktop' #   L-ibrary
+bind k:ctrl,delete focus 'Skim'
+bind l:ctrl,delete focus 'calibre' #   L-ibrary
+# bind l:ctrl,delete focus 'Mendeley Desktop' #   L-ibrary
 bind m:ctrl,delete focus 'CmapTools'        #   M-aps
 bind q:ctrl,delete focus 'Dictionary'       #   Q-uery
 bind r:ctrl,delete focus 'Finder'           #   R-anger
-bind s:ctrl,delete focus 'Skim'
-bind t:ctrl,delete focus 'iTerm'            #   T-erminal
+bind s:ctrl,delete focus 'Spotify'
+# bind t:ctrl,delete focus 'iTerm'            #   T-erminal
 bind v:ctrl,delete focus 'MacVim'           #   V-im
 bind x:ctrl,delete focus 'X11'              #   X11
 bind delete:ctrl,delete hint asdfjkl

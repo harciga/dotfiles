@@ -32,9 +32,9 @@ let g:airline_detect_iminsert = 1
 let g:airline_powerline_fonts = 1                                            " Enables utf-8 glyphs
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#branch#empty_message = ''
-let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#enabled = 1
 Bundle 'bling/vim-airline'
-Bundle 'farseer90718/vim-taskwarrior'
+" Bundle 'farseer90718/vim-taskwarrior'
 Bundle 'vimwiki/vimwiki'
 let g:task_gui_term = 1
 " Bundle 'kshenoy/vim-signature'
@@ -144,7 +144,7 @@ set linebreak
 " Turn backup off
 set nobackup
 set nowritebackup
-" set noswapfile
+set noswapfile
 " Tab settings
 set expandtab
 set shiftwidth=2
